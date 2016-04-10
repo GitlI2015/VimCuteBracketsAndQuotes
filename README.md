@@ -60,4 +60,3 @@
 	inoremap " <ESC>:call CuteQoute("\"")<cr>a
 	inoremap ' <ESC>:call CuteQoute("'")<cr>a
 	"above are something which can make vim use ''and \"" like Xcode
-	
