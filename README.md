@@ -17,10 +17,10 @@
 	
 	"inoremap {<cr> {<cr><BS>}<ESC>O    
 	"if set filetype indent on, please use the line above.
-	
+
 	inoremap {<cr> {<cr>}<ESC>O<TAB>
 	"if you only set autoindent, please use the line above
-	
+
 	function! CuteLeftBracket(character1, character2)
 		let l:line = getline(".")
 		let l:nextCharacter = l:line[col(".")]
@@ -66,4 +66,3 @@
 	inoremap " <ESC>:call CuteQoute("\"")<cr>a
 	inoremap ' <ESC>:call CuteQoute("'")<cr>a
 	"above are something which can make vim use ''and \"" like Xcode
-
