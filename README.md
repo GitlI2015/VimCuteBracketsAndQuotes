@@ -14,6 +14,8 @@
 
 5. 如果你cursor的右边是引号，那么输一个引号等价于按一下右方向键。
 
+
+
 	"inoremap {<cr> {<cr><BS>}<ESC>O    
 	"if set filetype indent on, please use the line above.
 
