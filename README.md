@@ -1,5 +1,7 @@
 # VimCuteBracketsAndQuotes
 
+This is NOT a plugin! You only need to copy some code to you .vimrc file! That's all!
+
 By using this, you can make your Vim as cute as IDE when you type brackets and quotes.
 
 Main Funtions:
