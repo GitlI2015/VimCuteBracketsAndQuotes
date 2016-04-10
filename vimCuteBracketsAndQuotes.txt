@@ -1,5 +1,3 @@
-"VimCuteBracketsAndQuotes
-
 "inoremap {<cr> {<cr><BS>}<ESC>O    
 "if set filetype indent on, please use the line above.
 
@@ -9,16 +7,13 @@ inoremap {<cr> {<cr>}<ESC>O<TAB>
 function! CuteLeftBracket(character1, character2)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	if (char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126)
-		execute "normal! a" . a:character1
-	else
-		execute "normal! a" . a:character1 . a:character2
+	echom col(".")
+	echom l:nextCharacter
+	if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
+		execute "normal! a" . a:character2
 		execute "normal! h"
 	endif
 endfunction
-
-inoremap ( <ESC>:call CuteLeftBracket('(', ')')<cr>a
-inoremap [ <ESC>:call CuteLeftBracket('[', ']')<cr>a
 
 function! CuteRightBracket(character)
 	let l:line = getline(".")
@@ -30,6 +25,8 @@ function! CuteRightBracket(character)
 	end
 endfunction
 
+inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<cr>a
+inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<cr>a
 inoremap ) <ESC>:call CuteRightBracket(')')<cr>a
 inoremap ] <ESC>:call CuteRightBracket(']')<cr>a
 inoremap } <ESC>:call CuteRightBracket('}')<cr>a
@@ -39,15 +36,13 @@ function! CuteQoute(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")] 
 	if l:nextCharacter == a:character 
-		execute "normal! l"
-	elseif (char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126)
+		execute "normal! x"
+	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 		execute "normal! a" . a:character
-	else
-		execute "normal! a" . a:character . a:character
 		execute "normal! h"
 	end
 endfunction
 
-inoremap " <ESC>:call CuteQoute("\"")<cr>a
-inoremap ' <ESC>:call CuteQoute("'")<cr>a
+inoremap " "<ESC>:call CuteQoute("\"")<cr>a
+inoremap ' '<ESC>:call CuteQoute("'")<cr>a
 "above are something which can make vim use ''and \"" like Xcode
