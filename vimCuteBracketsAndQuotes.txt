@@ -4,6 +4,10 @@
 inoremap {<cr> {<cr>}<ESC>O<TAB>
 "if you only set autoindent, please use the line above
 
+nnoremap <BS> la<BS><BS>
+"if you have () and the cursor is in the middle (now you are in insert mode)
+"now you can just press <ESC> and then press <BS> to delete ( and )
+
 function! CuteLeftBracket(character1, character2)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
