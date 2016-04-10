@@ -19,5 +19,7 @@ Main Funtions:
 Installation:
 
 Copy all lines in vimCuteBracketsAndQuotes.txt to you .vimrc. 
+
 (You need to change the code a little if you *set filetype indent on* instead of *set autoindent*.)
-That's all!
+
+Yes! That's all!
