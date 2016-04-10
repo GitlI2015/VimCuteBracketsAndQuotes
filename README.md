@@ -1,18 +1,18 @@
 # VimCuteBracketsAndQuotes
 
-By using this, you can make your Vim as cute as IDE when you input brackets and quotes.
+By using this, you can make your Vim as cute as IDE when you type brackets and quotes.
 
 Main Funtions:
 
-1. When you input a ( or [ at the end of a line, a ) or ] will be input automatically;
+1. When you type a ( or [ at the end of a line, a ) or ] will be typed automatically;
 
-2. When you input a { and then input Enter, a } will be input automatically and an empty line will be prepared with good indent;
+2. When you typed a { and then typed Enter, a } will be typed automatically and an empty line will be prepared with good indent;
 
-3. If the character next to cursor is a right bracket, you can input the bracket character to SKIP it;
+3. If the character next to cursor is a right bracket, you can typed the bracket character to SKIP it;
 
-4. When you input a ' or " at the end of a line, a ' or " will be inpit automatically;
+4. When you typed a ' or " at the end of a line, a ' or " will be inpit automatically;
 
-5. If the character next to cursor is a quote, you can input the quote character to SKIP it.;
+5. If the character next to cursor is a quote, you can typed the quote character to SKIP it.;
 
 ***
 
