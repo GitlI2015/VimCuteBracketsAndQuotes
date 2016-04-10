@@ -1,15 +1,17 @@
 # VimCuteBracketsAndQuotes
 
-不需要使用插件！仅仅更改vimrc！即可让你的Vim在输入括号和引号时和IDE一样智能！
+By using this, you can make your Vim as cute as IDE when you input brackets and quotes.
 
-主要功能：
+Main Funtions:
+1. When you input a ( or [ at the end of a line, a ) or ] will be input automatically;
+2. When you input a { and then input Enter, a } will be input automatically and an empty line will be prepared with good indent;
+3. If the character next to cursor is a right bracket, you can input the bracket character to SKIP it;
+4. When you input a ' or " at the end of a line, a ' or " will be inpit automatically;
+5. If the character next to cursor is a quote, you can input the quote character to SKIP it.;
 
-1. 在行末输入 ( 和 [ 时自动出一个对应的右括号；
 
-2. 输入 { 并回车时会自动出右花括号并且帮你换行缩进什么的；
+Installation:
 
-3. 如果你cursor的右边是右括号，那么输一个右括号等价于按一下右方向键；
-
-4. 行末输入引号自动再出一个引号；
-
-5. 如果你cursor的右边是引号，那么输一个引号等价于按一下右方向键。
+Copy all lines in vimCuteBracketsAndQuotes.txt to you .vimrc. 
+(You need to change the code a little if you *set filetype indent on* instead of *set autoindent*.)
+That's all!
