@@ -1,9 +1,13 @@
 # VimCuteBracketsAndQuotes
-Make vim smart when you input brackets and quotes
 
-It is so difficult to install a plugin for Vim, so I write the codes below.
+不需要使用插件！仅仅更改vimrc！即可让你的Vim在输入括号和引号时和IDE一样智能！
 
-You only need to paste it to you .vimrc and then your vim will be as cute as Xcode when you input brackets and quotes.
+主要功能：
+1. 在行末输入 ( 和 [ 时自动出一个对应的右括号；
+2. 输入 { 并回车时会自动出右花括号并且帮你换行缩进什么的；
+3. 如果你cursor的右边是右括号，那么输一个右括号等价于按一下右方向键；
+4. 行末输入引号自动再出一个引号；
+5. 如果你cursor的右边是引号，那么输一个引号等价于按一下右方向键。
 
 	"inoremap {<cr> {<cr><BS>}<ESC>O    
 	"if set filetype indent on, please use the line above.
