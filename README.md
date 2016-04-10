@@ -14,7 +14,9 @@ Main Funtions:
 
 4. When you typed a ' or " at the end of a line, a ' or " will be inpit automatically;
 
-5. If the character next to cursor is a quote, you can typed the quote character to SKIP it.;
+5. If the character next to cursor is a quote, you can typed the quote character to SKIP it;
+
+6. If now you have (|), [|], {|}, '|' or "|" (| means cursor) and you are in insert mode, you can type <ESC> and then type <BS> to delete both characters and go back to insert mode.
 
 ***
 
