@@ -57,9 +57,9 @@ function! CuteDelete()
 	let l:Character = l:line[col(".") - 2]
 	let l:nextCharacter = l:line[col(".")]
 	if col(".") != 1
-		if char2nr(l:nextCharacter) != 0
+		if ((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 			let l:eoltest = l:line[col(".") + 1]
-			if char2nr(l:eoltest) == 0
+			if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 				if (((l:nextCharacter == ")") && (l:Character == "(")) || 
 							\((l:nextCharacter == "}") && (l:Character == "{"))	||
 							\((l:nextCharacter == "]") && (l:Character == "["))	||
@@ -76,7 +76,7 @@ function! CuteDelete()
 			exec "normal x"
 		endif
 	else
-		if char2nr(l:nextCharacter) == 0
+		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 			exec "normal x"
 		endif
 	endif
