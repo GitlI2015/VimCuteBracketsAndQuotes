@@ -67,5 +67,5 @@ function! CuteDelete()
 	endif
 endfunction
 
-inoremap <BS> aa<ESC>:call CuteDelete()<CR>a<BS><BS>
+inoremap <BS> <SPACE><SPACE><ESC>:call CuteDelete()<CR>a<BS><BS>
 
