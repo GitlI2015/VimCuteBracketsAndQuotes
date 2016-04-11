@@ -50,3 +50,36 @@ endfunction
 inoremap " "<ESC>:call CuteQoute("\"")<cr>a
 inoremap ' '<ESC>:call CuteQoute("'")<cr>a
 "above are something which can make vim use ''and \"" like Xcode
+
+function! CuteDelete()
+	let l:line = getline(".")
+	let l:Character = l:line[col(".") - 2]
+	let l:nextCharacter = l:line[col(".")]
+	if col(".") != 1
+		if char2nr(l:nextCharacter) != 0
+			let l:eoltest = l:line[col(".") + 1]
+			if char2nr(l:eoltest) == 0
+				if (((l:nextCharacter == ")") && (l:Character == "(")) || 
+							\((l:nextCharacter == "}") && (l:Character == "{"))	||
+							\((l:nextCharacter == "]") && (l:Character == "["))	||
+							\((l:nextCharacter == "'") && (l:Character == "'"))	||
+							\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
+					exec "normal lxx"
+				else
+					exec "normal xh"
+				endif
+			else
+				exec "normal xh"
+			endif
+		else
+			exec "normal x"
+		endif
+	else
+		if char2nr(l:nextCharacter) == 0
+			exec "normal x"
+		endif
+	endif
+endfunction
+
+inoremap <BS> a<ESC>:call CuteDelete()<CR>a<BS>
+
