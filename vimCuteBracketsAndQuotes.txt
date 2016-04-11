@@ -1,10 +1,11 @@
+
 "inoremap {<cr> {<cr><BS>}<ESC>O    
 "if set filetype indent on, please use the line above.
 
 inoremap {<cr> {<cr>}<ESC>O<TAB>
 "if you only set autoindent, please use the line above
 
-nnoremap <BS> la<BS><BS>
+"nnoremap <BS> la<BS><BS>
 "if you have () and the cursor is in the middle (now you are in insert mode)
 "now you can just press <ESC> and then press <BS> to delete ( and )
 
@@ -29,6 +30,7 @@ function! CuteRightBracket(character)
 	end
 endfunction
 
+inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
 inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<cr>a
 inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<cr>a
 inoremap ) <ESC>:call CuteRightBracket(')')<cr>a
@@ -54,12 +56,12 @@ inoremap ' '<ESC>:call CuteQoute("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
-	let l:Character = l:line[col(".") - 2]
+	let l:Character = l:line[col(".") - 3]
 	let l:nextCharacter = l:line[col(".")]
 	if col(".") != 1
 		if ((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 			let l:eoltest = l:line[col(".") + 1]
-			if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
+			if !((char2nr(l:eoltest)>= 33) && (char2nr(l:eoltest) <= 126))
 				if (((l:nextCharacter == ")") && (l:Character == "(")) || 
 							\((l:nextCharacter == "}") && (l:Character == "{"))	||
 							\((l:nextCharacter == "]") && (l:Character == "["))	||
@@ -82,5 +84,5 @@ function! CuteDelete()
 	endif
 endfunction
 
-inoremap <BS> a<ESC>:call CuteDelete()<CR>a<BS>
+inoremap <BS> aa<ESC>:call CuteDelete()<CR>a<BS><BS>
 
