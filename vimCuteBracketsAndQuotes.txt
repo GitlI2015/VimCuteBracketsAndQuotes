@@ -57,9 +57,9 @@ function! CuteDelete()
 	let l:line = getline(".")
 	let l:Character = l:line[col(".") - 3]
 	let l:nextCharacter = l:line[col(".")]
-	if col(".") != 1
+	if col(".") != 2
 		exec "normal x"
-		if ((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
+		if (((char2nr(l:nextCharacter) >= 32) && (char2nr(l:nextCharacter) <= 126)) || (char2nr(l:nextCharacter) == 9))
 			let l:eoltest = l:line[col(".") + 1]
 			exec "normal h"
 			if (((l:nextCharacter == ")") && (l:Character == "(")) || 
@@ -69,20 +69,16 @@ function! CuteDelete()
 						\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
 				exec "normal x"
 			endif
-			if ((char2nr(l:eoltest) >= 33) && (char2nr(l:eoltest) <= 126))
-				exec "normal xh"
-			else
-				exec "normal x"
-			endif
-		else
-			exec "normal x"
 		endif
 	else
-		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
-			exec "normal x"
+		if !(((char2nr(l:Character) >= 32) && (char2nr(l:Character) <= 126)) || (char2nr(l:Character) == 9))
+			exec "normal hx"
 		endif
 	endif
 endfunction
+"char2nr("\t") == 9
+"char2nr("\ ") == 32
 
-inoremap <BS> <SPACE><SPACE><ESC>:call CuteDelete()<CR>a<BS>
+inoremap <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
+
 "only support ASCII characters
