@@ -4,7 +4,7 @@ inoremap {<CR> {<CR>}<ESC><BS>o
 function! CuteLeftBracket(character1, character2)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	if l:nextCharacter != a:character1
+	if l:nextCharacter != a:character1 && !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 		exec "normal! a" . a:character2
 		exec "normal! h"
 	endif
