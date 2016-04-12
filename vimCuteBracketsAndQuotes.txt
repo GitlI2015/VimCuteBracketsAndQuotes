@@ -1,10 +1,11 @@
+
 "inoremap {<cr> {<cr><BS>}<ESC>O    
 "if set filetype indent on, please use the line above.
 
 inoremap {<cr> {<cr>}<ESC>O<TAB>
 "if you only set autoindent, please use the line above
 
-nnoremap <BS> la<BS><BS>
+"nnoremap <BS> la<BS><BS>
 "if you have () and the cursor is in the middle (now you are in insert mode)
 "now you can just press <ESC> and then press <BS> to delete ( and )
 
@@ -29,6 +30,7 @@ function! CuteRightBracket(character)
 	end
 endfunction
 
+inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
 inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<cr>a
 inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<cr>a
 inoremap ) <ESC>:call CuteRightBracket(')')<cr>a
@@ -50,3 +52,33 @@ endfunction
 inoremap " "<ESC>:call CuteQoute("\"")<cr>a
 inoremap ' '<ESC>:call CuteQoute("'")<cr>a
 "above are something which can make vim use ''and \"" like Xcode
+
+function! CuteDelete()
+	let l:line = getline(".")
+	let l:Character = l:line[col(".") - 3]
+	let l:nextCharacter = l:line[col(".")]
+	if col(".") != 2
+		exec "normal x"
+		if (((char2nr(l:nextCharacter) >= 32) && (char2nr(l:nextCharacter) <= 126)) || (char2nr(l:nextCharacter) == 9))
+			let l:eoltest = l:line[col(".") + 1]
+			exec "normal h"
+			if (((l:nextCharacter == ")") && (l:Character == "(")) || 
+						\((l:nextCharacter == "}") && (l:Character == "{"))	||
+						\((l:nextCharacter == "]") && (l:Character == "["))	||
+						\((l:nextCharacter == "'") && (l:Character == "'"))	||
+						\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
+				exec "normal x"
+			endif
+		endif
+	else
+		if !(((char2nr(l:Character) >= 32) && (char2nr(l:Character) <= 126)) || (char2nr(l:Character) == 9))
+			exec "normal hx"
+		endif
+	endif
+endfunction
+"char2nr("\t") == 9
+"char2nr("\ ") == 32
+
+inoremap <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
+
+"only support ASCII characters
