@@ -31,7 +31,7 @@ inoremap } <ESC>:call CuteRightBracket('}')<CR>a
 function! CuteQuote(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	if ((char2nr(l:nextCharacter) >= 32) && (char2nr(l:nextCharacter) <= 126)) || char2nr(l:nextCharacter) == 9
+	if char2nr(l:nextCharacter) != 0
 		if l:nextCharacter != a:character
 			exec "normal! a" . a:character
 			exec "normal! h"
@@ -47,8 +47,7 @@ function! CuteDelete()
 	let l:nextCharacter = l:line[col(".")]
 	if col(".") != 2
 		exec "normal x"
-		if (((char2nr(l:nextCharacter) >= 32) && (char2nr(l:nextCharacter) <= 126)) || (char2nr(l:nextCharacter) == 9))
-			let l:eoltest = l:line[col(".") + 1]
+		if char2nr(l:nextCharacter) != 0
 			exec "normal h"
 			if (((l:nextCharacter == ")") && (l:Character == "(")) || 
 						\((l:nextCharacter == "}") && (l:Character == "{"))	||
@@ -59,7 +58,7 @@ function! CuteDelete()
 			endif
 		endif
 	else
-		if !(((char2nr(l:Character) >= 32) && (char2nr(l:Character) <= 126)) || (char2nr(l:Character) == 9))
+		if char2nr(l:Character) == 0
 			exec "normal hx"
 		endif
 	endif
