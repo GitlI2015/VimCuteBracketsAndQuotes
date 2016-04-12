@@ -1,4 +1,3 @@
-
 "inoremap {<cr> {<cr><BS>}<ESC>O    
 "if set filetype indent on, please use the line above.
 
