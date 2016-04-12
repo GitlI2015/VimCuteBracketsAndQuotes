@@ -30,7 +30,7 @@ function! CuteRightBracket(character)
 	end
 endfunction
 
-inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
+"inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
 inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<cr>a
 inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<cr>a
 inoremap ) <ESC>:call CuteRightBracket(')')<cr>a
