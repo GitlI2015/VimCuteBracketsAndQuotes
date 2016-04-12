@@ -53,26 +53,26 @@ inoremap " "<ESC>:call CuteQoute("\"")<cr>a
 inoremap ' '<ESC>:call CuteQoute("'")<cr>a
 "above are something which can make vim use ''and \"" like Xcode
 
-
 function! CuteDelete()
 	let l:line = getline(".")
 	let l:Character = l:line[col(".") - 3]
 	let l:nextCharacter = l:line[col(".")]
 	if col(".") != 1
+		exec "normal x"
 		if ((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
 			let l:eoltest = l:line[col(".") + 1]
-			if !((char2nr(l:eoltest)>= 33) && (char2nr(l:eoltest) <= 126))
-				if (((l:nextCharacter == ")") && (l:Character == "(")) || 
-							\((l:nextCharacter == "}") && (l:Character == "{"))	||
-							\((l:nextCharacter == "]") && (l:Character == "["))	||
-							\((l:nextCharacter == "'") && (l:Character == "'"))	||
-							\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
-					exec "normal lxx"
-				else
-					exec "normal xh"
-				endif
-			else
+			exec "normal h"
+			if (((l:nextCharacter == ")") && (l:Character == "(")) || 
+						\((l:nextCharacter == "}") && (l:Character == "{"))	||
+						\((l:nextCharacter == "]") && (l:Character == "["))	||
+						\((l:nextCharacter == "'") && (l:Character == "'"))	||
+						\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
+				exec "normal x"
+			endif
+			if ((char2nr(l:eoltest) >= 33) && (char2nr(l:eoltest) <= 126))
 				exec "normal xh"
+			else
+				exec "normal x"
 			endif
 		else
 			exec "normal x"
@@ -84,5 +84,5 @@ function! CuteDelete()
 	endif
 endfunction
 
-inoremap <BS> aa<ESC>:call CuteDelete()<CR>a<BS><BS>
-
+inoremap <BS> <SPACE><SPACE><ESC>:call CuteDelete()<CR>a<BS>
+"only support ASCII characters
