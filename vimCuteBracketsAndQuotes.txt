@@ -37,20 +37,25 @@ inoremap ] <ESC>:call CuteRightBracket(']')<cr>a
 inoremap } <ESC>:call CuteRightBracket('}')<cr>a
 "above are something which can make vim use ()[]{}just like Xcode
 
-function! CuteQoute(character)
+function! CuteQuote(character)
 	let l:line = getline(".")
-	let l:nextCharacter = l:line[col(".")] 
-	if l:nextCharacter == a:character 
-		execute "normal! x"
-	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
-		execute "normal! a" . a:character
-		execute "normal! h"
-	end
+	let l:nextCharacter = l:line[col(".")]
+	let l:previousCharacter = l:line[col(".") - 3]
+	if l:nextCharacter != a:character
+		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126)) 
+			exec "normal! a" . a:character
+			exec "normal! h"
+		end
+		exec "normal! a" . a:character
+		if(char2nr(l:previousCharacter) == 0)
+			exec "normal! h"
+		endif
+	else
+		exec "normal! l"
+	endif
 endfunction
-
-inoremap " "<ESC>:call CuteQoute("\"")<cr>a
-inoremap ' '<ESC>:call CuteQoute("'")<cr>a
-"above are something which can make vim use ''and \"" like Xcode
+inoremap " <ESC>:call CuteQuote("\"")<cr>a
+inoremap ' <ESC>:call CuteQuote("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
@@ -62,10 +67,24 @@ function! CuteDelete()
 			exec "normal h"
 			if (((l:nextCharacter == ")") && (l:Character == "(")) || 
 						\((l:nextCharacter == "}") && (l:Character == "{"))	||
-						\((l:nextCharacter == "]") && (l:Character == "["))	||
-						\((l:nextCharacter == "'") && (l:Character == "'"))	||
-						\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
+						\((l:nextCharacter == "]") && (l:Character == "[")))	
 				exec "normal x"
+			elseif	(((l:nextCharacter == "'") && (l:Character == "'"))	||
+						\((l:nextCharacter == "\"") && (l:Character == "\"")))	 
+				let l:BackslashIndicator=l:line[col(".") - 3]
+				let l:pos=col(".") - 3
+				let l:counter=0
+				while((l:pos > 0) && (l:BackslashIndicator == "\\"))
+					let l:pos=l:pos - 1
+					let l:counter=l:counter + 1
+					let l:BackslashIndicator=l:line[l:pos]
+				endwhile
+				while(l:counter > 0)
+					let l:counter=l:counter - 2
+				endwhile
+				if l:counter != -1
+					exec "normal x"
+				endif
 			endif
 		endif
 	else
@@ -74,7 +93,5 @@ function! CuteDelete()
 		endif
 	endif
 endfunction
-"char2nr("\t") == 9
-"char2nr("\ ") == 32
 
 inoremap <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
