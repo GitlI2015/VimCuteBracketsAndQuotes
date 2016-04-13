@@ -30,7 +30,7 @@ inoremap } <ESC>:call CuteRightBracket('}')<CR>a
 function! CuteQuote(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	let l:previousCharacter = l:line[col(".") - 3]
+	let l:previousCharacter = l:line[col(".") - 2]
 	if l:nextCharacter != a:character
 		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126)) 
 			exec "normal! a" . a:character
