@@ -44,7 +44,7 @@ function! CuteQuote(character)
 endfunction
 
 inoremap " "<ESC>:call CuteQuote("\"")<cr>a
-inoremap ' "<ESC>:call CuteQuote("'")<cr>a
+inoremap ' '<ESC>:call CuteQuote("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
