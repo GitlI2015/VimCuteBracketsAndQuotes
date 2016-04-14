@@ -6,17 +6,23 @@ By using this, you can make your Vim as cute as IDE when you type brackets and q
 
 Main Funtions:
 
-1. When you type a ( or [ at the end of a line, a ) or ] will be typed automatically;
+1. If you type {<cr> you will get a } automatically and an empty line will be prepared with good indent;
 
-2. When you typed a { and then typed Enter, a } will be typed automatically and an empty line will be prepared with good indent;
+2. When you type a ( , if there is BLANK at the right side, you will get (|). Same for [ and {;
 
-3. If the character next to cursor is a right bracket, you can typed the bracket character to SKIP it;
+3. when you are in this situation: XXX|), if you type ), you will get XXX)|. Same for [ and {;
 
-4. When you typed a ' or " at the end of a line, a ' or " will be inpit automatically;
+4. For quotes (' and "), I will use ' as an example to show the function:
 
-5. If the character next to cursor is a quote, you can typed the quote character to SKIP it;
+  if there is a \ before cursor, like this: \\|, you will always get \'| after you type ';
 
-6. If now you have (|), [|], {|}, '|' or "|" (| means cursor) and you are in insert mode, you can type <ESC> and then type <BS> to delete both characters and go back to insert mode.
+  else if you have a ' after cursor, like this: XXX|', you will get XXX'| after you type ';
+
+  else if you have a ' before cursor, like this: XXX'|, you will get XXX''| after you type ';
+
+  else if ther is BLANK at the right side, like this XXX|, you will get XXX''| after you type '.
+
+5. If now you have (|), [|], {|}, '|' or "|" (| means cursor) and you are in insert mode, you can type \<BS\> to delete both characters. (Thank Jiahao for writing this part!)
 
 ***
 
