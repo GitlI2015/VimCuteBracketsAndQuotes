@@ -1,5 +1,5 @@
 
-inoremap {<CR> {<CR>}<ESC><BS>o
+inoremap {<CR> {<CR>}<ESC>O
 
 function! CuteLeftBracket(character1, character2)
 	let l:line = getline(".")
