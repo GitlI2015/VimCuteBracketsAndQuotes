@@ -30,22 +30,21 @@ inoremap } <ESC>:call CuteRightBracket('}')<CR>a
 function! CuteQuote(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	let l:previousCharacter = l:line[col(".") - 2]
-	if l:nextCharacter != a:character && l:previousCharacter != a:character
-		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
-			exec "normal! a" . a:character
-			exec "normal! h"
-		end
+	let l:lastCharacter = l:line[col(".") - 2]
+	if l:nextCharacter == a:character
+		exec "normal x"
+	elseif l:lastCharacter == a:character
+	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 122)) ||
+				\(l:nextCharacter == ")") ||
+				\(l:nextCharacter == "]") ||
+				\(l:nextCharacter == "}") 
 		exec "normal! a" . a:character
-		if(char2nr(l:previousCharacter) == 0)
-			exec "normal! h"
-		endif
-	else
-		exec "normal! l"
+		exec "normal! h"
 	endif
 endfunction
-inoremap " <ESC>:call CuteQuote("\"")<cr>a
-inoremap ' <ESC>:call CuteQuote("'")<cr>a
+
+inoremap " "<ESC>:call CuteQuote("\"")<cr>a
+inoremap ' "<ESC>:call CuteQuote("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
