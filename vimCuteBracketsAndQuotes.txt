@@ -4,16 +4,12 @@
 inoremap {<cr> {<cr>}<ESC>O<TAB>
 "if you only set autoindent, please use the line above
 
-"nnoremap <BS> la<BS><BS>
-"if you have () and the cursor is in the middle (now you are in insert mode)
-"now you can just press <ESC> and then press <BS> to delete ( and )
-
 function! CuteLeftBracket(character1, character2)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	echom col(".")
-	echom l:nextCharacter
-	if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
+	if (char2nr(l:nextCharacter) == 0) 
+		\ || (char2nr(l:nextCharacter) == 9) 
+		\ || (char2nr(l:nextCharacter) == 32)
 		execute "normal! a" . a:character2
 		execute "normal! h"
 	endif
@@ -23,39 +19,41 @@ function! CuteRightBracket(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")] 
 	if l:nextCharacter == a:character 
-		execute "normal! l"
+		execute "normal! x"
 	else
-		execute "normal! a" . a:character
-	end
+		execute "normal! r" . a:character
+	endif
 endfunction
 
-"inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
 inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<cr>a
 inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<cr>a
-inoremap ) <ESC>:call CuteRightBracket(')')<cr>a
-inoremap ] <ESC>:call CuteRightBracket(']')<cr>a
-inoremap } <ESC>:call CuteRightBracket('}')<cr>a
+inoremap { {<ESC>:call CuteLeftBracket('{', '}')<cr>a
+inoremap ) .<ESC>:call CuteRightBracket(')')<cr>a
+inoremap ] .<ESC>:call CuteRightBracket(']')<cr>a
+inoremap } .<ESC>:call CuteRightBracket('}')<cr>a
 "above are something which can make vim use ()[]{}just like Xcode
 
 function! CuteQuote(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
-	let l:previousCharacter = l:line[col(".") - 2]
-	if l:nextCharacter != a:character && l:previousCharacter != a:character
-		if !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 126))
-			exec "normal! a" . a:character
-			exec "normal! h"
-		end
+	let l:lastCharacter = l:line[col(".") - 2]
+	"notice that we has inserted a quote befor we use this function
+	"before the <ESC> works, it is like this [lastCharacter][samequote][cursor'|'][nextCharacter]"
+
+	if l:nextCharacter == a:character
+		exec "normal x"
+	elseif l:lastCharacter == a:character
+	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 122)) ||
+				\(l:nextCharacter == ")") ||
+				\(l:nextCharacter == "]") ||
+				\(l:nextCharacter == "}") 
 		exec "normal! a" . a:character
-		if(char2nr(l:previousCharacter) == 0)
-			exec "normal! h"
-		endif
-	else
-		exec "normal! l"
+		exec "normal! h"
 	endif
 endfunction
-inoremap " <ESC>:call CuteQuote("\"")<cr>a
-inoremap ' <ESC>:call CuteQuote("'")<cr>a
+
+inoremap " "<ESC>:call CuteQuote("\"")<cr>a
+inoremap ' "<ESC>:call CuteQuote("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
@@ -95,3 +93,4 @@ function! CuteDelete()
 endfunction
 
 inoremap <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
+
