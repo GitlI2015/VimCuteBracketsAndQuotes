@@ -14,7 +14,7 @@ Main Funtions:
 
 4. For quotes (' and "), I will use ' as an example to show the function:
 
-  if there is a \ before cursor, like this: \|, you will always get \'| after you type ';
+  if there is a \ before cursor, like this: \\|, you will always get \'| after you type ';
 
   else if you have a ' after cursor, like this: XXX|', you will get XXX'| after you type ';
 
@@ -22,7 +22,7 @@ Main Funtions:
 
   else if ther is BLANK at the right side, like this XXX|, you will get XXX''| after you type '.
 
-5. If now you have (|), [|], {|}, '|' or "|" (| means cursor) and you are in insert mode, you can type \<BS\> to delete both characters and go back to insert mode. (Thank Jiahao for writing this part!)
+5. If now you have (|), [|], {|}, '|' or "|" (| means cursor) and you are in insert mode, you can type \<BS\> to delete both characters. (Thank Jiahao for writing this part!)
 
 ***
 
