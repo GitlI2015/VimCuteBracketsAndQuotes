@@ -8,10 +8,6 @@ Main Funtions:
 
 1. If you type {<cr> you will get a } automatically and an empty line will be prepared with good indent;
 
-  def function{
-    |
-  }
-
 2. When you type a ( , if there is BLANK at the right side, you will get (|). Same for [ and {;
 
 3. when you are in this situation: XXX|), if you type ), you will get XXX)|. Same for [ and {;
