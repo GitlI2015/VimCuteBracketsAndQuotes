@@ -31,9 +31,9 @@ function! CuteQuote(character)
 	let l:line = getline(".")
 	let l:nextCharacter = l:line[col(".")]
 	let l:lastCharacter = l:line[col(".") - 2]
-	if l:nextCharacter == a:character
+	if l:lastCharacter == a:character || l:lastCharacter == "\\"
+	elseif l:nextCharacter == a:character
 		exec "normal x"
-	elseif l:lastCharacter == a:character || l:lastCharacter == "\\"
 	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 122)) ||
 				\(l:nextCharacter == ")") ||
 				\(l:nextCharacter == "]") ||
