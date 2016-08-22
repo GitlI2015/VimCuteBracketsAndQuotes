@@ -34,7 +34,7 @@ function! CuteQuote(character)
 	if l:lastCharacter == a:character || l:lastCharacter == "\\"
 	elseif l:nextCharacter == a:character
 		exec "normal x"
-	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 122)) ||
+	elseif !((char2nr(l:nextCharacter) >= 33) && (char2nr(l:nextCharacter) <= 122) || char2nr(l:nextCharacter) == 0) ||
 				\(l:nextCharacter == ")") ||
 				\(l:nextCharacter == "]") ||
 				\(l:nextCharacter == "}") 
