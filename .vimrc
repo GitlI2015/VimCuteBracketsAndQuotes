@@ -10,8 +10,8 @@ function! CuteLeftBracket(character1, character2)
 	endif
 endfunction
 
-inoremap ( (<ESC>:call CuteLeftBracket('(', ')')<CR>a
-inoremap [ [<ESC>:call CuteLeftBracket('[', ']')<CR>a
+inoremap <silent> ( (<ESC>:call CuteLeftBracket('(', ')')<CR>a
+inoremap <silent> [ [<ESC>:call CuteLeftBracket('[', ']')<CR>a
 
 function! CuteRightBracket(character)
 	let l:line = getline(".")
@@ -23,9 +23,9 @@ function! CuteRightBracket(character)
 	end
 endfunction
 
-inoremap ) <ESC>:call CuteRightBracket(')')<CR>a
-inoremap ] <ESC>:call CuteRightBracket(']')<CR>a
-inoremap } <ESC>:call CuteRightBracket('}')<CR>a
+inoremap <silent> ) <ESC>:call CuteRightBracket(')')<CR>a
+inoremap <silent> ] <ESC>:call CuteRightBracket(']')<CR>a
+inoremap <silent> } <ESC>:call CuteRightBracket('}')<CR>a
 
 function! CuteQuote(character)
 	let l:line = getline(".")
@@ -43,8 +43,8 @@ function! CuteQuote(character)
 	endif
 endfunction
 
-inoremap " "<ESC>:call CuteQuote("\"")<cr>a
-inoremap ' '<ESC>:call CuteQuote("'")<cr>a
+inoremap <silent> " "<ESC>:call CuteQuote("\"")<cr>a
+inoremap <silent> ' '<ESC>:call CuteQuote("'")<cr>a
 
 function! CuteDelete()
 	let l:line = getline(".")
@@ -83,5 +83,5 @@ function! CuteDelete()
 	endif
 endfunction
 
-inoremap <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
+inoremap <silent> <BS> ..<ESC>:call CuteDelete()<CR>a<BS><BS>
 
